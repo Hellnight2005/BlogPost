@@ -1,8 +1,7 @@
-
 const User = require("../models/user");
 
 const HandleSignin = (req, res) => {
-  return res.render("signin"); // Ensure there is a 'signin.ejs' file in your 'views' directory
+  return res.render("Signin"); // Ensure there is a 'signin.ejs' file in your 'views' directory
 };
 
 // this is function for /user/singnin for post request
@@ -20,7 +19,7 @@ const HandleSigninpPost = async (req, res) => {
 
   } catch (error) {
     console.error("Signin error:", error);
-    return res.render("signin", {
+    return res.render("Signin", {
       error: "Incorrect Email or Password",
     });
   }
@@ -28,7 +27,7 @@ const HandleSigninpPost = async (req, res) => {
 
 
 const HandleSignup = (req, res) => {
-  return res.render("signup"); // Ensure there is a 'signup.ejs' file in your 'views' directory
+  return res.render("Signup"); // Ensure there is a 'signup.ejs' file in your 'views' directory
 };
 
 // this is function for /user/singnup for post request

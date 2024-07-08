@@ -28,9 +28,9 @@ app.use(cookieParser());
 app.use(CheckForAuthenticationCookie("token"));
 
 // Route to render the home page
-app.get("/", (req, res) => {
+app.get("/", CheckForAuthenticationCookie("token"), (req, res) => {
   res.render("home", {
-    user: req.user,
+    user: req.user || {}, // Define user as an empty object if req.user is not defined
   });
 });
 
