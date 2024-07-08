@@ -10,14 +10,22 @@ const HandleSigninpPost = async (req, res) => {
   try {
     const { email, password } = req.body;
     console.log(req.body);
+
+    // Assuming User.matchPasswordAndGenerateToken returns a token
     const token = await User.matchPasswordAndGenerateToken(email, password);
-    return res.cookie("token", token).redirect("/");
+    
+    // Set cookie and redirect if token is generated successfully
+    res.cookie("token", token);
+    return res.redirect("/");
+
   } catch (error) {
+    console.error("Signin error:", error);
     return res.render("signin", {
       error: "Incorrect Email or Password",
     });
   }
 };
+
 
 const HandleSignup = (req, res) => {
   return res.render("signup"); // Ensure there is a 'signup.ejs' file in your 'views' directory
