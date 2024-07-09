@@ -6,8 +6,26 @@
 </head>
 <body>
     <%- include('./partials/nav') %>
-    <h1>Welcome to the Home Page</h1>
-    <%= JSON.stringify(user) %>
+    <!-- views/home.ejs -->
+<div class="container mt-3 ">
+  <div class="row row-cols-4">
+    <% if (blogs) { %>
+      <% blogs.forEach(blog => { %>
+        <div class="col">
+        <div class="card col" style="width: 18rem;">
+          <img src="<%= blog.CoverImageURL %>" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title"><%= blog.title  %></h5>
+           
+            <a href="/blog/<%= blog._id %>" class="btn btn-primary">View</a>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p>No blog posts found</p>
+    <% } %>
+  </div>
     <%- include('./partials/scripts') %>
 </body>
 </html>

@@ -1,17 +1,22 @@
+const mongoose = require("mongoose");
 const User = require("../models/user");
 
 const HandleSignin = (req, res) => {
-  return res.render("Signin"); // Ensure there is a 'signin.ejs' file in your 'views' directory
+  return res.render("Signin"); // Ensure there is a 'ignin.ejs' file in your 'views' directory
 };
 
 // this is function for /user/singnin for post request
 const HandleSigninpPost = async (req, res) => {
   try {
     const { email, password } = req.body;
-    // Assuming User.matchPasswordAndGenerateToken returns a token
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.render("Signin", {
+        error:
+          "You need to Create Account first. No account found with this email.",
+      });
+    }
     const token = await User.matchPasswordAndGenerateToken(email, password);
-
-    // Set cookie and redirect if token is generated successfully
     res.cookie("token", token);
     return res.redirect("/");
   } catch (error) {
@@ -23,7 +28,7 @@ const HandleSigninpPost = async (req, res) => {
 };
 
 const HandleSignup = (req, res) => {
-  return res.render("Signup"); // Ensure there is a 'signup.ejs' file in your 'views' directory
+  return res.render("Signup"); // Ensure there is a 'ignup.ejs' file in your 'views' directory
 };
 
 // this is function for /user/singnup for post request

@@ -2,6 +2,8 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const userRouter = require("./routes/user");
+const blogRouter = require("./routes/blog");
+const Blog = require("./models/blog");
 const mongoose = require("mongoose");
 const { CheckForAuthenticationCookie } = require("./middleware/authentication");
 const app = express();
@@ -27,15 +29,19 @@ app.set("views", path.resolve("./views"));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(CheckForAuthenticationCookie("token"));
+app.use(express.static(path.resolve("./public")));
 
 // Route to render the home page
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
+  const allBlogs = await Blog.find({});
   res.render("home", {
-    user: req.user, // Define user as an empty object if req.user is not defined
+    user: req.user,
+    blogs: allBlogs,
   });
 });
 
 // Use the user routes
 app.use("/user", userRouter);
+app.use("/blog", blogRouter);
 
 app.listen(PORT, () => console.log(`Server started at PORT: ${PORT}`));
