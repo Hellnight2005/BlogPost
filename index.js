@@ -4,24 +4,23 @@ const cookieParser = require("cookie-parser");
 const userRouter = require("./routes/user");
 const blogRouter = require("./routes/blog");
 const Blog = require("./models/blog");
+
 const mongoose = require("mongoose");
+const User = require("./models/user");
 const { CheckForAuthenticationCookie } = require("./middleware/authentication");
 const app = express();
 const PORT = 8000;
 
 const MONGODB_URL =
   process.env.MONGODB_URL || "mongodb://localhost:27017/mydatabase";
-mongoose.connect(MONGODB_URL, {
-  useNewUrlParser: true, // Note: No longer necessary, but harmless if left
-  useUnifiedTopology: true, // Note: No longer necessary, but harmless if left
-});
-
+mongoose.connect(MONGODB_URL);
 const db = mongoose.connection;
 
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 db.once("open", () => {
   console.log("MongoDB Connected");
 });
+
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 
@@ -43,5 +42,7 @@ app.get("/", async (req, res) => {
 // Use the user routes
 app.use("/user", userRouter);
 app.use("/blog", blogRouter);
+
+// Error handling middleware
 
 app.listen(PORT, () => console.log(`Server started at PORT: ${PORT}`));
