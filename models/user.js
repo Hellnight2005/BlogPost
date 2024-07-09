@@ -75,6 +75,7 @@ userSchema.statics.matchPasswordAndGenerateToken = async function(email, passwor
 
     const tokenPayload = {
       _id: user._id,
+      fullName: user.fullName,
       email: user.email,
       profileImageURL: user.profileImageURL,
       role: user.role,

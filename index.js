@@ -7,7 +7,8 @@ const { CheckForAuthenticationCookie } = require("./middleware/authentication");
 const app = express();
 const PORT = 8000;
 
-const MONGODB_URL =process.env.MONGODB_URL || 'mongodb://localhost:27017/mydatabase';
+const MONGODB_URL =
+  process.env.MONGODB_URL || "mongodb://localhost:27017/mydatabase";
 mongoose.connect(MONGODB_URL, {
   useNewUrlParser: true, // Note: No longer necessary, but harmless if left
   useUnifiedTopology: true, // Note: No longer necessary, but harmless if left
@@ -28,9 +29,9 @@ app.use(cookieParser());
 app.use(CheckForAuthenticationCookie("token"));
 
 // Route to render the home page
-app.get("/", CheckForAuthenticationCookie("token"), (req, res) => {
+app.get("/", (req, res) => {
   res.render("home", {
-    user: req.user || {}, // Define user as an empty object if req.user is not defined
+    user: req.user, // Define user as an empty object if req.user is not defined
   });
 });
 

@@ -8,15 +8,12 @@ const HandleSignin = (req, res) => {
 const HandleSigninpPost = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(req.body);
-
     // Assuming User.matchPasswordAndGenerateToken returns a token
     const token = await User.matchPasswordAndGenerateToken(email, password);
-    
+
     // Set cookie and redirect if token is generated successfully
     res.cookie("token", token);
     return res.redirect("/");
-
   } catch (error) {
     console.error("Signin error:", error);
     return res.render("Signin", {
@@ -24,7 +21,6 @@ const HandleSigninpPost = async (req, res) => {
     });
   }
 };
-
 
 const HandleSignup = (req, res) => {
   return res.render("Signup"); // Ensure there is a 'signup.ejs' file in your 'views' directory
@@ -41,9 +37,14 @@ const HandleSignupPost = async (req, res) => {
   return res.redirect("/");
 };
 
+const HandleLogout = async (req, res) => {
+  res.clearCookie("token").redirect("/");
+};
+
 module.exports = {
   HandleSignin,
   HandleSignup,
   HandleSignupPost,
   HandleSigninpPost,
+  HandleLogout,
 };
