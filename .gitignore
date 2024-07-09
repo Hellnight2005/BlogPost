@@ -1,0 +1,61 @@
+# dependencies
+node_modules/
+.pnp
+.yarn/
+bower_components/
+components/
+
+# testing
+coverage/
+tests/
+
+# production
+build/
+dist/
+public/
+*public*
+
+# IDEs and editors
+.idea/
+.vscode/
+*.suo
+*.sln
+*.user
+*.tmp
+*.bak
+*.swp
+
+# logs
+logs/
+
+# temp files
+*.log
+*.tmp
+*.pid
+*.lock
+
+# database
+*.sqlite
+*.db
+*.mdb
+*.accdb
+*.mdf
+*.ldf
+
+# other
+npm-debug.log
+yarn-error.log
+*.pem
+*.cer
+*.key
+
+# package managers
+.DS_Store
+Thumbs.db
+*.egg-info/
+*.svn
+*.git
+.hg
+.hgignore
+.gitattributes
+.gitmodules
