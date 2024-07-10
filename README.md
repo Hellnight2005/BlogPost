@@ -4,6 +4,7 @@
 This project is a blogging application developed using Node.js, Express.js, MongoDB, and EJS as the templating engine. It allows users to sign up, sign in, and create, view, and manage blog posts. The application includes user authentication and maintains session state using cookies.
 
 ## Project Structure
+``` bash
 /blogging-app
 │
 ├── /models
@@ -25,7 +26,7 @@ This project is a blogging application developed using Node.js, Express.js, Mong
 ├── .env
 ├── app.js
 └── package.json
-
+```
 ## Installation
 
 1. **Clone the repository:**
