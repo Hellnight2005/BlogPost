@@ -1,3 +1,4 @@
+const { log } = require("console");
 const Blog = require("../models/blog");
 const Comment = require("../models/comment");
 const multer = require("multer");
@@ -48,12 +49,11 @@ const handleBlogView = async (req, res) => {
 };
 
 const handleComment = async (req, res) => {
- 
+  console.log("req.user._id", req.user._id);
   await Comment.create({
     content: req.body.content,
     blogId: req.params.blogId,
     createdBy: req.user._id,
-
   });
   return res.redirect(`/blog/${req.params.blogId}`);
 };
